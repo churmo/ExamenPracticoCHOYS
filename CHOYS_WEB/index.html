@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registro CHOYS</title>
+	<!-- ENLACES A DISEÑO DE BOOTSTRAP -->
+	<!-- ETIQUETAS PARA RESPONSIVE -->
+	<!-- ENLACE PARA JAVASCRIPT -->
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<script src="jq/jquery.min.js"></script>
+	<script src="jq/validaciones.js"></script>
+</head>
+<body>
+	<h2 class="text-center"><strong>NUEVO REGISTRO</strong></h2>
+	<br>
+	<form class="container form-horizontal">
+	
+	<!-- ETIQUETA Y CAMPO PARA NOMBRE -->
+	<div class="form-group " id="div_nombre">
+			<label class="control-label col-sm-2" ><strong>Nombre</strong></label>
+			<div class="col-sm-8">
+				<input type="name" id="txt_nombre" class="form-control w3-hover-border-green" placeholder="Nombre" >
+				<span class="help-block" id="span_nombre"></span>
+			</div>
+		</div>
+	
+	<!-- ETIQUETA Y CAMPO PARA EMAIL -->
+	<div class="form-group" id="div_email" >
+    		<label class="control-label col-sm-2" ><strong>Email</strong></label>
+    		<div class="col-sm-8">
+      			<input type="text" class="form-control w3-hover-border-green" id="txt_email" placeholder="Email">
+      			<span class="help-block" id="span_email"></span>
+    		</div>
+  		</div>
+
+  	<!-- ETIQUETA Y CAMPO PARA TELEFONO -->
+	<div class="form-group" id="div_telefono">
+			<label class="control-label col-sm-2" ><strong>Telefono</strong></label>
+			<div class="col-sm-8">
+				<input type="name" id="txt_telefono" class="form-control w3-hover-border-green" placeholder="Telefono" >
+				<span class="help-block" id="span_telefono"></span>
+			</div>
+		</div>
+
+		<!-- ETIQUETA PARA COMBOBOX Y OPCIONES-->
+		<div class="form-group">
+			<label class="control-label col-sm-2" ><strong>Estado civil</strong></label>
+			<div class="col-sm-8">
+				<select class="form-control w3-hover-border-green" id="cbx_estadocivil">
+  					<option>SOLTERO</option>
+  					<option>CASADO</option>
+ 					<option>DIVORSIADO</option>
+  					<option>VIUDO</option>
+  					<option>CONYUGAL</option>
+					</select>
+			</div>
+		</div>
+
+		<!-- ETIQUETA PARA RADIOBUTTON Y OPCIONES-->
+		<div class="form-group">
+			<label class="control-label col-sm-2" ><strong>¿Tiene<br>hijos?</strong></label>
+			<div class="col-sm-8 radio">
+				<label class="radio-inline">
+ 				<input type="radio" name="rbn_tienehijos" id="rbn_tieneshijosSI" value="Si"> SI
+				</label>
+				<label class="radio-inline">
+  				<input type="radio" name="rbn_tienehijos" id="rbn_hijosNO" value="No"> NO
+				</label>
+			</div>
+		</div>
+
+		<!-- ETIQUETA PARA CHECKBOX Y OPCIONES-->
+		<div class="form-group" id="div_intereses">
+			<label class="control-label col-sm-2" ><strong>INTERESES</strong></label>
+			<div class="col-sm-8 radio">
+				<label class="checkbox-inline"><input type="checkbox" id="cbx_libros">Libros</label>
+				<label class="checkbox-inline"><input type="checkbox" id="cbx_musica">Musica</label>
+				<label class="checkbox-inline"><input type="checkbox" id="cbx_deportes">Deportes</label>
+				<label class="checkbox-inline"><input type="checkbox" id="cbx_otros">Otros</label>
+			</div>
+			<span class="help-block" id="span_intereses"></span>
+		</div>
+
+		<!-- ETIQUETA PARA BOTONES-->
+		<div class="form-group text-center">
+			<button type="button" class="btn btn-responsive" id="btn_regresar">Regresar</button> 
+			<button type="button" class="btn btn-primary btn-responsive" id="btn_guardar">Guardar</button>
+		</div>
+	</form>
+
+	<!-- Web Service -->
+	<script type="text/javascript">
+		
+	//CREACION DE LA TABLA
+	var tabla="<table class=\"table table-hover\">";
+		    tabla+="<thead class=\"thead-gray\">"
+	        tabla+="<tr>";
+		    tabla+="<th scope=\"row \">id</td>";
+		    tabla+="<th scope=\"row \">Nombre Completo</td>";
+		    tabla+="<th scope=\"row \">Correo</td>";
+		    tabla+="<th scope=\"row \">Avatar</td>";
+	        tabla+="</tr>";
+	        tabla+="</thead>"	
+	    $.get("https://reqres.in/api/users?page=2", function(data){
+    	var contenido=data.data;
+		for (var i = 0; i <contenido.length; i++) {     
+		     elemento=contenido[i];     
+           	tabla+="<tr>";
+           	tabla+="<td>"+elemento.id+"</td>";
+           	tabla+="<td>"+elemento.first_name+" "+elemento.last_name+"</td>";
+           	tabla+="<td>"+elemento.email+"</td>";
+           	tabla+="<td> <img src='"+elemento.avatar+"'></td>";
+           	tabla+="</tr>";    	
+		}
+		tabla+="</table>";
+		$("#tabla_p").html(tabla);
+		});
+	</script>
+	<!-- ESPACIO DONDE VA UBICADA LA TABLA -->
+	<div id="tabla_p" class="container . table table-responsive"></div>
+</body>
+<footer>Juan Carlos Hurtado Morales</footer>
+</html>
